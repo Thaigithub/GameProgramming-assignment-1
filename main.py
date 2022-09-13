@@ -25,5 +25,4 @@ def main():
         else: isRunning = game_page()
     print('Thanh you for playing our game!')
     print('Give us 10 point!')
-
 main()
