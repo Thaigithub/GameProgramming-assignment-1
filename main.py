@@ -8,6 +8,7 @@ def main():
     isRunning = True
     while isRunning:
         isRunning, level = welcome_page()
+        print(isRunning)
         if not isRunning: break
         else: isRunning = game_page(200)
     pg.quit()
