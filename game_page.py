@@ -8,9 +8,9 @@ def time_to_string(time):
     return minute+":"+second
 
 # def game_page(pygame, time):
-def game_page(time):
+def game_page(pg, time):
     #Load image
-    background = pygame.image.load("image/Background.jpygame")
+    background = pygame.image.load("image/Background.jpg")
     zombie = pygame.image.load("image/Zombie.png")
     zombie = pygame.transform.scale(zombie,(60,60))
     mallet1 = pygame.image.load("image/Mallet1.png")
@@ -56,15 +56,12 @@ def game_page(time):
                         if zombie_rect_list[i][j].collidepoint(pygame.mouse.get_pos()) and zombie_matrix[i][j]:
                             check = True
                             break
-                if check: print("Hit")
-                else: print("Miss")
         # Update display
         surface.blit(background,(0,0))
         for i in range(5):
             for j in range(9):
                 if zombie_matrix[i][j]:
                     surface.blit(zombie,zombie_rect_list[i][j])
-        print(mouseclick)
         if mouseclick: surface.blit(mallet2,mallet2.get_rect(center = (pygame.mouse.get_pos()[0]+40,pygame.mouse.get_pos()[1]-20)))
         else: surface.blit(mallet1,mallet1.get_rect(center = (pygame.mouse.get_pos()[0]+40,pygame.mouse.get_pos()[1]-20)))
         surface.blit(display_object["countdown"][1], display_object["countdown"][1].get_rect(center = (900, 750)))
