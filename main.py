@@ -1,20 +1,17 @@
-import pygame
 from game_page import *
 from welcome_page import *
 from result_page import *
 
 def main():
-    pygame.init()
-    pygame.display.set_caption('Zombie Wacking')
     isRunning = True
     level = 0
     score = 0
     while isRunning:
-        isRunning, level = welcome_page(pygame)
+        isRunning, level = welcome_page()
         if not isRunning: break
-        else: isRunning = game_page(pygame, level)
+        else: isRunning = game_page(level)
         if not isRunning: break
-        else: isRunning = result_page(pygame, score)
+        else: isRunning = result_page(score)
     pygame.quit()
     print('Thanh you for playing our game!')
     print('Give us 10 point!')
