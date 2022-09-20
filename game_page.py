@@ -10,6 +10,7 @@ def time_to_string(time):
 # def game_page(pygame, time):
 def game_page(pg, time):
     #Load image
+    pygame.init()
     background = pygame.image.load("image/Background.jpg")
     zombie = pygame.image.load("image/Zombie.png")
     zombie = pygame.transform.scale(zombie,(60,60))
