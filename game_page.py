@@ -19,25 +19,26 @@ def game_page(time):
     mallet2 = pg.transform.scale(mallet2,(100,100))
     #Set up system
     surface = pg.display.set_mode((background.get_width(), background.get_height()))
-    clock = pg.time.Clock()
-    display_object = {}
     timer_event = {}
     #Game logic
     zombie_matrix = []
-    zombie_rect_list = [[]]
+    zombie_rect_list = []
     for i in range(5):
         zombie_matrix.append([])
+        zombie_rect_list.append([])
         for j in range(9):
             zombie_matrix[i].append(False)
-            zombie.get_rect(center = (93+105*j,83+140*i))
+            zombie_rect_list[i].append(zombie.get_rect(center = (93+105*j,83+140*i)))
     #Set up display utility object
+    display_object = {}
     display_object["countdown"] = [pg.font.SysFont(None, 50)]
     display_object["countdown"].append(display_object["countdown"][0].render(time_to_string(time), True, (255, 255, 255)))
     timer_event["countdown"] = pg.USEREVENT+len(timer_event)+1
     pg.time.set_timer(timer_event["countdown"], 1000)
     #Start game
     while True:
-        surface.blit(background,(0,0))
+        #Input and process
+        mouseclick = False
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return False
@@ -47,20 +48,24 @@ def game_page(time):
                 if time == 0:
                     pg.time.set_timer(timer_event["countdown"],0)
                     return True
+            if event.type == pg.MOUSEBUTTONDOWN:
+                mouseclick = True
+                check = False
+                for i in range(5):
+                    for j in range(9):
+                        if zombie_rect_list[i][j].collidepoint(pg.mouse.get_pos()) and zombie_matrix[i][j]:
+                            check = True
+                            break
+                if check: print("Hit")
+                else: print("Miss")
+        # Update display
+        surface.blit(background,(0,0))
         for i in range(5):
             for j in range(9):
                 if zombie_matrix[i][j]:
                     surface.blit(zombie,zombie_rect_list[i][j])
-        if event.type == pg.MOUSEBUTTONDOWN:
-            surface.blit(mallet2,mallet2.get_rect(center = (pg.mouse.get_pos()[0]+40,pg.mouse.get_pos()[1]-20)))
-            check = False
-            for i in range(5):
-                for j in range(9):
-                    if zombie_rect_list[i][j].collidepoint(pg.mouse.get_pos()) and zombie_matrix[i][j]:
-                        check = True
-                        break
-            if check: print("Hit")
-            else: print("Miss")
+        print(mouseclick)
+        if mouseclick: surface.blit(mallet2,mallet2.get_rect(center = (pg.mouse.get_pos()[0]+40,pg.mouse.get_pos()[1]-20)))
         else: surface.blit(mallet1,mallet1.get_rect(center = (pg.mouse.get_pos()[0]+40,pg.mouse.get_pos()[1]-20)))
         surface.blit(display_object["countdown"][1], display_object["countdown"][1].get_rect(center = (900, 750)))
         pg.display.flip()
