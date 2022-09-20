@@ -7,7 +7,9 @@ def main():
     pygame.display.set_caption('Zombie Wacking')
     isRunning = True
     while isRunning:
-        isRunning, level = welcome_page(pygame)
+        isRunning, level = welcome_page()
+        print(isRunning)
+        print(level)
         if not isRunning: break
         else: isRunning = game_page(pygame, level)
     pygame.quit()

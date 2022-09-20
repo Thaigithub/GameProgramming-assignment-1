@@ -1,4 +1,4 @@
-import sys
+import pygame, sys
 import math
 
 #button class
@@ -32,8 +32,12 @@ class Button():
 
 
 
-def welcome_page(pygame):
+def welcome_page():
+    #Init SCREEN
+    pygame.init()
+    pygame.display.set_caption('Zombie Wacking')
     
+    #Set FPS
     clock = pygame.time.Clock()
     FPS = 60
 
@@ -108,18 +112,22 @@ def welcome_page(pygame):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if LEVEL1_BUTTON.checkForInput(MENU_MOUSE_POS):
                         pop_sound.play()
-                        level = 1
+                        level = 1                       
+                        return isRunning, level
                     if LEVEL2_BUTTON.checkForInput(MENU_MOUSE_POS):
                         pop_sound.play()
                         level = 2
+                        return isRunning, level
                     if LEVEL3_BUTTON.checkForInput(MENU_MOUSE_POS):
                         pop_sound.play()
                         level = 3
+                        return isRunning, level
                     if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
                         pop_sound.play()
                         isRunning = False
-                        welcome_page(pygame)
+                        welcome_page()
             pygame.display.update()
+        
         return isRunning, level
     #Option
     def options():
@@ -152,7 +160,7 @@ def welcome_page(pygame):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if OPTIONS_BACK.checkForInput(OPTIONS_MOUSE_POS):
                         pop_sound.play()
-                        welcome_page(pygame)
+                        welcome_page()
 
             pygame.display.update()
 
@@ -193,6 +201,8 @@ def welcome_page(pygame):
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
                     isRunning ,level = play()
+                    pygame.quit()
+                    return isRunning,level
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
                     options()
@@ -203,5 +213,7 @@ def welcome_page(pygame):
         pygame.display.update()
         
     return isRunning,level
+
+
        
    
