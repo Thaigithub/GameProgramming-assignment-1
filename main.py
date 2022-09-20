@@ -7,11 +7,11 @@ def main():
     level = 0
     score = 0
     while isRunning:
-        isRunning, level = welcome_page()
+        # isRunning, level = welcome_page()
+        # if not isRunning: break
+        isRunning = game_page(level)
         if not isRunning: break
-        else: isRunning = game_page(level)
-        if not isRunning: break
-        else: isRunning = result_page(score)
+        isRunning = result_page(score)
     pygame.quit()
     print('Thanh you for playing our game!')
     print('Give us 10 point!')
