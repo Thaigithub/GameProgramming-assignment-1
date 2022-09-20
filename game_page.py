@@ -1,4 +1,3 @@
-import pygame as pg
 
 framerate = 60
 
@@ -8,7 +7,7 @@ def time_to_string(time):
     second = str(time%60) if (time%60)>=10 else "0"+str(time%60)
     return minute+":"+second
 
-def game_page(time):
+def game_page(pg, time):
     #Load image
     background = pg.image.load("image/Background.jpg")
     zombie = pg.image.load("image/Zombie.png")
