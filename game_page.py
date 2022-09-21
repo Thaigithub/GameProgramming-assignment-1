@@ -7,10 +7,16 @@ def time_to_string(time):
     second = str(time%60) if (time%60)>=10 else "0"+str(time%60)
     return minute+":"+second
 
-# def game_page(pygame, time):
-def game_page(pg, time):
+def loop_event():
+    pass
+
+def loop_display():
+    pass
+
+def game_page(time):
     #Load image
     pygame.init()
+    pygame.display.set_caption("Zombie Wacking")
     background = pygame.image.load("image/Background.jpg")
     zombie = pygame.image.load("image/Zombie.png")
     zombie = pygame.transform.scale(zombie,(60,60))
@@ -31,9 +37,8 @@ def game_page(pg, time):
             zombie_matrix[i].append(False)
             zombie_rect_list[i].append(zombie.get_rect(center = (93+105*j,83+140*i)))
     #Set up display utility object
-    display_object = {}
-    display_object["countdown"] = [pygame.font.SysFont(None, 50)]
-    display_object["countdown"].append(display_object["countdown"][0].render(time_to_string(time), True, (255, 255, 255)))
+    timer_object = [pygame.font.SysFont(None, 50)]
+    timer_object.append(timer_object[0].render(time_to_string(time), True, (255, 255, 255)))
     timer_event["countdown"] = pygame.USEREVENT+len(timer_event)+1
     pygame.time.set_timer(timer_event["countdown"], 1000)
     #Start game
@@ -45,7 +50,7 @@ def game_page(pg, time):
                 return False
             if event.type == timer_event["countdown"]:
                 time -= 1
-                display_object["countdown"][1] = display_object["countdown"][0].render(time_to_string(time), True, (255, 255, 255))
+                timer_object[1] = timer_object[0].render(time_to_string(time), True, (255, 255, 255))
                 if time == 0:
                     pygame.time.set_timer(timer_event["countdown"],0)
                     return True
@@ -65,5 +70,6 @@ def game_page(pg, time):
                     surface.blit(zombie,zombie_rect_list[i][j])
         if mouseclick: surface.blit(mallet2,mallet2.get_rect(center = (pygame.mouse.get_pos()[0]+40,pygame.mouse.get_pos()[1]-20)))
         else: surface.blit(mallet1,mallet1.get_rect(center = (pygame.mouse.get_pos()[0]+40,pygame.mouse.get_pos()[1]-20)))
-        surface.blit(display_object["countdown"][1], display_object["countdown"][1].get_rect(center = (900, 750)))
+        surface.blit(timer_object[1], timer_object[1].get_rect(center = (900, 750)))
+        pygame.cl
         pygame.display.flip()
