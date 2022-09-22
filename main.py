@@ -1,4 +1,4 @@
-from game_page import game_page
+from game_page import Game
 from welcome_page import welcome_page
 from result_page import result_page
 
@@ -7,10 +7,13 @@ def main():
     level = 0
     score = 0
     while isRunning:
-        # isRunning, level = welcome_page()
-        # if not isRunning: break
+        isRunning, level = welcome_page()
+        if not isRunning: break
         time = 30
-        isRunning = game_page(time)
+        max_zombie = 5
+        game = Game(time, max_zombie)
+        isRunning = game.game_page()
+        del game
         if not isRunning: break
         isRunning = result_page(score)
     print('Thanh you for playing our game!')

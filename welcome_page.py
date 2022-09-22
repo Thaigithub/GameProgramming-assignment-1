@@ -103,19 +103,17 @@ def play():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if LEVEL1_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
-                    level = 1
+                    return True, 1
                 if LEVEL2_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
-                    level = 2
+                    return True, 2
                 if LEVEL3_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
-                    level = 3
+                    return True, 3
                 if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
                     pop_sound.play()
-                    isRunning = False
                     welcome_page()
         pygame.display.update()
-    return isRunning, level
 
 #Option
 def options():
@@ -201,7 +199,7 @@ def welcome_page():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
-                    isRunning ,level = play()
+                    return play()
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
                     options()
