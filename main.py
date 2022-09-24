@@ -10,12 +10,14 @@ def main():
         isRunning, level = welcome_page()
         if not isRunning: break
         time = 30
-        max_zombie = 5
+        max_zombie = 30
         game = Game(time, max_zombie)
-        isRunning = game.game_page()
+        isRunning = game.game_page(level)
         del game
         if not isRunning: break
         isRunning = result_page(score)
+        
+        
     print('Thanh you for playing our game!')
     print('Give us 10 point!')
 
