@@ -9,13 +9,15 @@ def main():
     while isRunning:
         isRunning, level = welcome_page()
         if not isRunning: break
-        time = 30
+        time = 3
         max_zombie = 5
         game = Game(time, max_zombie)
         isRunning = game.game_page()
         del game
         if not isRunning: break
         isRunning = result_page(score)
+        
+        
     print('Thanh you for playing our game!')
     print('Give us 10 point!')
 

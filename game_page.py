@@ -1,5 +1,6 @@
 import pygame
 from define import Constants, Zombie, Score, Text
+from result_page import result_page
 
 class Game:
 
@@ -223,10 +224,10 @@ class Game:
             self.loop_display(clicked, hit, miss)
 
             # Update display
-            self.clock.tick(Constants.GAMEMAXFPS)
+            self.clock.tick(Constants.GAMEMAXFPS)         
             
             pygame.display.flip()
-                    
+         
         pygame.quit()
         
         

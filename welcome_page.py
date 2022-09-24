@@ -1,6 +1,8 @@
 import pygame, sys
 import math
 
+import result_page
+
 pygame.init()
 
 clock = pygame.time.Clock()
