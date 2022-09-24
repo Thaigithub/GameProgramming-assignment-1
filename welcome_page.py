@@ -1,16 +1,13 @@
 import pygame, sys
 import math
+from define import Constants
 
 pygame.init()
 
 clock = pygame.time.Clock()
 FPS = 60
 
-#create display window
-SCREEN_WIDTH = 1000
-SCREEN_HEIGHT = 600
-
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+screen = pygame.display.set_mode((Constants.GAMEWIDTH, Constants.GAMEHEIGHT))
 pygame.display.set_caption('Zombie Wacking')
 
 def get_font(size): # Returns Press-Start-2P in the desired size
@@ -65,7 +62,7 @@ class Button():
 def play():
     level = 1
     isRunning = True
-    tiles = math.ceil(SCREEN_WIDTH / bg_width) + 1
+    tiles = math.ceil(Constants.GAMEWIDTH / bg_width) + 1
     scroll = 0
     while True:
         
@@ -83,13 +80,13 @@ def play():
         MENU_TEXT = get_font(100).render("MAIN MENU", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
     
-        LEVEL1_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(500, 150), 
+        LEVEL1_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(650, 200), 
                             text_input="LEVEL 1", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        LEVEL2_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(500, 300), 
+        LEVEL2_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(650, 350), 
                             text_input="LEVEL 2", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        LEVEL3_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(500, 450), 
+        LEVEL3_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(650, 500), 
                             text_input="LEVEL 3", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        PLAY_BACK = Button(image=None, pos=(100, 20), 
+        PLAY_BACK = Button(image=None, pos=(100, 30), 
                             text_input="BACK", font=get_font(30), base_color="#d7fcd4", hovering_color="White")
         for button in [LEVEL1_BUTTON, LEVEL2_BUTTON, LEVEL3_BUTTON,PLAY_BACK]:
             button.changeColor(PLAY_MOUSE_POS)
@@ -117,7 +114,7 @@ def play():
 
 #Option
 def options():
-    tiles = math.ceil(SCREEN_WIDTH / bg_width) + 1
+    tiles = math.ceil(Constants.GAMEWIDTH / bg_width) + 1
     scroll = 0
     while True:
         clock.tick(FPS)
@@ -133,7 +130,7 @@ def options():
 
         
         OPTIONS_MOUSE_POS = pygame.mouse.get_pos()
-        OPTIONS_BACK = Button(image=None, pos=(500, 460), 
+        OPTIONS_BACK = Button(image=None, pos=(650, 460), 
                             text_input="BACK", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         OPTIONS_BACK.changeColor(OPTIONS_MOUSE_POS)
@@ -160,7 +157,7 @@ def welcome_page():
     #define game variables
     isRunning = False
     level = 1
-    tiles = math.ceil(SCREEN_WIDTH / bg_width) + 1
+    tiles = math.ceil(Constants.GAMEWIDTH / bg_width) + 1
     scroll = 0
     sound_on = True
     while run:
@@ -180,11 +177,11 @@ def welcome_page():
         MENU_TEXT = get_font(100).render("MAIN MENU", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
     
-        PLAY_BUTTON = Button(image=pygame.image.load("image/PlayRect.png"), pos=(500, 200), 
+        PLAY_BUTTON = Button(image=pygame.image.load("image/PlayRect.png"), pos=(650, 200), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(500, 350), 
+        OPTIONS_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(650, 350), 
                             text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("image/QuitRect.png"), pos=(500, 500), 
+        QUIT_BUTTON = Button(image=pygame.image.load("image/QuitRect.png"), pos=(650, 500), 
                             text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
         SOUND_BUTTON = Button(image=pygame.image.load("image/soundOnBtn.png"), pos=(50, 150), 
                             text_input="", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
