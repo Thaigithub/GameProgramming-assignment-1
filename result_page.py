@@ -101,15 +101,15 @@ def result_page(score):
             save_highscore(score)        
 
         HIGH_SCORE1 = Button(image=pygame.image.load("image/goldcrown.png"), pos=(650, 200), 
-                            text_input="Best:"+str(load_highscore()), font=get_font(75), base_color="#d7fcd4", hovering_color="White")
+                            text_input="Best:"+str(load_highscore()), font=get_font(60), base_color="#d7fcd4", hovering_color="White")
         HIGH_SCORE2 = Button(image=pygame.image.load("image/silvercrown.png"), pos=(650, 400), 
-                            text_input="Yours:"+str(score), font=get_font(75), base_color="#d7fcd4", hovering_color="White")        
+                            text_input="Yours:"+str(score), font=get_font(60), base_color="#d7fcd4", hovering_color="White")        
         for button in [HIGH_SCORE1,HIGH_SCORE2]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(screen)
 
         PLAYAGAIN_BUTTON = Button(image=pygame.image.load("image/ResetRect.png"), pos=(650, 550), 
-                             text_input="PLAY AGAIN", font=get_font(30), base_color="#d7fcd4", hovering_color="White")
+                             text_input="PLAY AGAIN", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
         PLAY_BACK = Button(image=None, pos=(100, 30), 
                             text_input="BACK", font=get_font(30), base_color="#d7fcd4", hovering_color="White")
         for button in [PLAY_BACK, PLAYAGAIN_BUTTON]:
