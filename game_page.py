@@ -219,10 +219,10 @@ class Game:
         return False
 
     def game_page(self, level):
+        score = 0
         while self.loop:
             clicked, hit, miss = self.loop_events()
 
-            score = 0
             if hit:    
                 score += 2
             if miss:
