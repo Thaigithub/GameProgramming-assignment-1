@@ -2,6 +2,8 @@ import pygame, sys
 import math
 import welcome_page as wcp
 from define import Constants
+from tkinter import *
+from tkinter import messagebox
 
 pygame.init()
 
@@ -57,18 +59,36 @@ class Button():
         self.image = pygame.transform.scale(img, self.scale)
 
 def save_highscore(high_score):
-    file = open('highscore.txt', 'w+') # open the highscore file (in write mode)
-    file.write(str(high_score)) # write the data to it
-    file.close() # close it
+    file = open("highscore.txt","r")    
+    listscores = []
+    for x in file:
+        listscores.append(int(x))
+    file.close()
+
+    file = open("highscore.txt", "w")
+    listscores.append(high_score)
+    listscores.sort()
+    listscores.reverse()
+    while len(listscores)>2:
+        listscores.pop()
+    for x in listscores:
+        file.write(str(x)+'\n')
+    file.close()
 
 def load_highscore():    
-    file = open('highscore.txt', 'r') # open the highscore file (in read mode)
-    high_score = file.read() # read it
-    high_score = int(high_score) # convert it back to int (from string)
-    file.close()    
-    return high_score
+    file = open("highscore.txt","r+")    
+    listscores = []
+    for x in file:
+        listscores.append(int(x))
+    file.close()
+    return listscores
 
-
+def reset_score():
+    res = messagebox.askquestion(' ', 'Reset scores?')
+    if res == 'yes':
+        file = open('highscore.txt', 'w')
+        file.truncate(0)
+    
 
 #game loop
 isRunning = False
@@ -97,22 +117,35 @@ def result_page(score):
         MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))    
         
         #highscore        
-        if score > load_highscore():            
-            save_highscore(score)        
-
-        HIGH_SCORE1 = Button(image=pygame.image.load("image/goldcrown.png"), pos=(650, 200), 
-                            text_input="Best:"+str(load_highscore()), font=get_font(60), base_color="#d7fcd4", hovering_color="White")
-        HIGH_SCORE2 = Button(image=pygame.image.load("image/silvercrown.png"), pos=(650, 400), 
+        try:
+            highscore1 = str(load_highscore()[0])
+            if load_highscore()[0] < score: save_highscore(score)
+        except:
+            save_highscore(score)
+            highscore1 = str(load_highscore()[0])
+        try:
+            highscore2 = str(load_highscore()[1])
+            if load_highscore()[1] < score and load_highscore()[0] > score: save_highscore(score)
+        except:
+            highscore2 = " "            
+            if load_highscore()[0] > score: save_highscore(score)
+        HIGH_SCORE1 = Button(image=pygame.image.load("image/goldcrown.png"), pos=(650, 150), 
+                            text_input="1ST:"+highscore1, font=get_font(60), base_color="#d7fcd4", hovering_color="White")
+        HIGH_SCORE2 = Button(image=pygame.image.load("image/silvercrown.png"), pos=(650, 300), 
+                            text_input="2ND:"+highscore2, font=get_font(60), base_color="#d7fcd4", hovering_color="White")
+        YOUR_SCORE = Button(image=pygame.image.load("image/bronze.png"), pos=(650, 450), 
                             text_input="Yours:"+str(score), font=get_font(60), base_color="#d7fcd4", hovering_color="White")        
-        for button in [HIGH_SCORE1,HIGH_SCORE2]:
+        for button in [HIGH_SCORE1,HIGH_SCORE2,YOUR_SCORE]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(screen)
 
-        PLAYAGAIN_BUTTON = Button(image=pygame.image.load("image/ResetRect.png"), pos=(650, 550), 
+        PLAYAGAIN_BUTTON = Button(image=pygame.image.load("image/ResetRect.png"), pos=(350, 600), 
                              text_input="PLAY AGAIN", font=get_font(20), base_color="#d7fcd4", hovering_color="White")
+        RESET_BUTTON = Button(image=pygame.image.load("image/ResetRect.png"), pos=(950, 600), 
+                             text_input="RESET", font=get_font(20), base_color="#d7fcd4", hovering_color="White")        
         PLAY_BACK = Button(image=None, pos=(100, 30), 
                             text_input="BACK", font=get_font(30), base_color="#d7fcd4", hovering_color="White")
-        for button in [PLAY_BACK, PLAYAGAIN_BUTTON]:
+        for button in [PLAY_BACK, PLAYAGAIN_BUTTON, RESET_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(screen)
         
@@ -127,6 +160,10 @@ def result_page(score):
                 if PLAY_BACK.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()                    
                     return wcp.welcome_page()
+                if RESET_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    pop_sound.play()                    
+                    reset_score()                    
+                    
         pygame.display.update()
 
     return isRunning
