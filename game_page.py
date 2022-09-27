@@ -203,7 +203,7 @@ class Game:
         # Time's up indicator
         if self.timer and endGame:
             timer_label_1 = self.text.get_label("Time's up!", scale=3, color=(0, 150, 255))
-            timer_label_2 = self.text.get_label("Press space to restart...", scale=2, color=(0, 150, 255))
+            timer_label_2 = self.text.get_label("Caculating point...", scale=2, color=(0, 150, 255))
 
             timer_x_1 = (Constants.GAMEWIDTH - timer_label_1.get_width()) / 2
             timer_x_2 = (Constants.GAMEWIDTH - timer_label_2.get_width()) / 2
@@ -214,20 +214,30 @@ class Game:
             self.screen.blit(timer_label_1, (timer_x_1, timer_y_1))
             self.screen.blit(timer_label_2, (timer_x_2, timer_y_2))
 
+            return True
+        
+        return False
 
-    def game_page(self):
+    def game_page(self, level):
+        score = 0
         while self.loop:
             clicked, hit, miss = self.loop_events()
 
+            if hit:    
+                score += 2
+            if miss:
+                score -= 1
             # Do all render
-            self.loop_display(clicked, hit, miss)
+            end = self.loop_display(clicked, hit, miss)
 
             # Update display
             self.clock.tick(Constants.GAMEMAXFPS)
             
             pygame.display.flip()
+            
+            if end:
+                return True, score
                     
-        pygame.quit()
         
         
         

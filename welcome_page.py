@@ -1,5 +1,6 @@
 import pygame, sys
 import math
+from define import Constants
 
 #button class
 class Button():
@@ -62,7 +63,7 @@ def welcome_page():
     run = True
     isRunning = False
     level = 1
-    tiles = math.ceil(SCREEN_WIDTH / bg_width) + 1
+    tiles = math.ceil(Constants.GAMEWIDTH / bg_width) + 1
     scroll = 0
     
     # Funcitions
@@ -183,11 +184,11 @@ def welcome_page():
         MENU_TEXT = get_font(100).render("MAIN MENU", True, "#b68f40")
         MENU_RECT = MENU_TEXT.get_rect(center=(640, 100))
     
-        PLAY_BUTTON = Button(image=pygame.image.load("image/PlayRect.png"), pos=(500, 200), 
+        PLAY_BUTTON = Button(image=pygame.image.load("image/PlayRect.png"), pos=(650, 200), 
                             text_input="PLAY", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        OPTIONS_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(500, 350), 
+        OPTIONS_BUTTON = Button(image=pygame.image.load("image/OptionRect.png"), pos=(650, 350), 
                             text_input="OPTIONS", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
-        QUIT_BUTTON = Button(image=pygame.image.load("image/QuitRect.png"), pos=(500, 500), 
+        QUIT_BUTTON = Button(image=pygame.image.load("image/QuitRect.png"), pos=(650, 500), 
                             text_input="QUIT", font=get_font(75), base_color="#d7fcd4", hovering_color="White")
 
         for button in [PLAY_BUTTON, OPTIONS_BUTTON, QUIT_BUTTON]:
