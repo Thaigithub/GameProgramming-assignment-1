@@ -10,7 +10,7 @@ def main():
         isRunning, level = welcome_page()
         if not isRunning: break
         time = 30
-        max_zombie = 5
+        max_zombie = 30
         game = Game(time, max_zombie)
         isRunning = game.game_page()
         del game

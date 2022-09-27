@@ -29,26 +29,6 @@ class Button():
             self.text = self.font.render(self.text_input, True, self.hovering_color)
         else:
             self.text = self.font.render(self.text_input, True, self.base_color)
-<<<<<<< HEAD
-<<<<<<< HEAD
-    def update_image(self,img):
-        self.image = pygame.transform.scale(img, self.scale)
-    
-=======
-
-
-
-def welcome_page():
-    #Init SCREEN
-    pygame.init()
-    pygame.display.set_caption('Zombie Wacking')
-    
-    #Set FPS
-    clock = pygame.time.Clock()
-    FPS = 60
->>>>>>> origin/thangNew
-=======
->>>>>>> 8d315b5fbfcd7f93e4559651e57c99fd88c2402e
 
 
 
@@ -84,12 +64,6 @@ def welcome_page():
     level = 1
     tiles = math.ceil(SCREEN_WIDTH / bg_width) + 1
     scroll = 0
-<<<<<<< HEAD
-<<<<<<< HEAD
-    sound_on = True
-=======
-=======
->>>>>>> 8d315b5fbfcd7f93e4559651e57c99fd88c2402e
     
     # Funcitions
     
@@ -192,10 +166,6 @@ def welcome_page():
 
     
     #Screen Welcome Page
-<<<<<<< HEAD
->>>>>>> origin/thangNew
-=======
->>>>>>> 8d315b5fbfcd7f93e4559651e57c99fd88c2402e
     while run:
         clock.tick(FPS)
     
@@ -230,19 +200,9 @@ def welcome_page():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
-<<<<<<< HEAD
-<<<<<<< HEAD
-                    return play()
-=======
                     isRunning ,level = play()
                     pygame.quit()
                     return isRunning,level
->>>>>>> origin/thangNew
-=======
-                    isRunning ,level = play()
-                    pygame.quit()
-                    return isRunning,level
->>>>>>> 8d315b5fbfcd7f93e4559651e57c99fd88c2402e
                 if OPTIONS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     pop_sound.play()
                     options()
@@ -252,22 +212,8 @@ def welcome_page():
                     sys.exit()
         pygame.display.update()
         
-<<<<<<< HEAD
-<<<<<<< HEAD
-    return isRunning,level       
-=======
     return isRunning,level
 
 
        
    
->>>>>>> origin/thangNew
-=======
-    return isRunning,level
-
-
-
-
-       
-   
->>>>>>> 8d315b5fbfcd7f93e4559651e57c99fd88c2402e
